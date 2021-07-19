@@ -39,6 +39,10 @@ const Home = () => {
           content="Deretan Rekan Usaha Gopay dengan protokol kebersihan buat belanja bulanan hingga beli vitamin harian!"
         />
         <NewsList />
+        <Information
+          title="Jangan lupa 3 M"
+          content="Saat menerima pesanan kamu jangan lupa untuk menjaga jarak, cuci tangan setelah menerima pesanan kamu. Cek kebersihan selalu."
+        />
       </ScrollView>
     </>
   );

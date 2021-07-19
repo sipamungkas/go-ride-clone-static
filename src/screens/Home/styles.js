@@ -10,7 +10,9 @@ export default StyleSheet.create({
     paddingBottom: 200,
     flexGrow: 1,
   },
-  contentStyle: {},
+  contentStyle: {
+    paddingBottom: 20,
+  },
   searchContainer: {
     flexDirection: 'row',
     flex: 1,
