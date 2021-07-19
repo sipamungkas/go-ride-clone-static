@@ -7,6 +7,7 @@ import SearchBox from '../../components/Home/SearchBox';
 import ProfileIcon from '../../components/Home/Profile';
 import Payment from '../../components/Home/Payment';
 import ContentMenuList from '../../components/Home/ContentMenuList';
+import Information from '../../components/Home/Information';
 
 import styles from './styles';
 import COLORS from '../../Colors';
@@ -29,6 +30,10 @@ const Home = () => {
         <ContentMenuList
           contentMenu={contentMenu}
           setContentMenu={setContentMenu}
+        />
+        <Information
+          title="Psst.. Keamanan kamu, prioritas kami."
+          content="Deretan Rekan Usaha Gopay dengan protokol kebersihan buat belanja bulanan hingga beli vitamin harian!"
         />
       </ScrollView>
     </View>
