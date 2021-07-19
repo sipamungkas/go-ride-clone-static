@@ -1,14 +1,15 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Badge from '../Badge';
 import styles from './styles';
 
 const Header = () => {
   return (
     <View style={styles.header}>
       <View style={styles.tabMenu}>
-        <View style={styles.badge}>
-          <Text style={styles.badgeCounter}>5</Text>
+        <View style={styles.badgeContainer}>
+          <Badge counter={5} />
         </View>
         <Icon name="sale" size={25} color="#fff" style={styles.tabIcon} />
         <Text style={styles.text}>Promo</Text>
@@ -18,8 +19,8 @@ const Header = () => {
         <Text style={styles.text}>Home</Text>
       </View>
       <View style={styles.tabMenu}>
-        <View style={styles.badge}>
-          <View style={styles.badgeWhiteDot} />
+        <View style={styles.badgeContainer}>
+          <Badge dot />
         </View>
         <Icon name="chat" size={25} color="#fff" style={styles.tabIcon} />
         <Text style={styles.text}>Chat</Text>

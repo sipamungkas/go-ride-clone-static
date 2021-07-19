@@ -24,25 +24,13 @@ export default StyleSheet.create({
   text: {
     color: 'white',
   },
-  badge: {
-    backgroundColor: '#b72d26',
+  badgeContainer: {
     width: 17,
     height: 17,
-    borderRadius: 8,
     position: 'absolute',
     top: -1,
     right: -1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  badgeCounter: {
-    color: 'white',
-    fontSize: 8,
-  },
-  badgeWhiteDot: {
-    width: 3,
-    height: 3,
-    borderRadius: 2.5,
-    backgroundColor: 'white',
   },
 });
