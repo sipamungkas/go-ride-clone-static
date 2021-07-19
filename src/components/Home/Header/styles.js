@@ -8,7 +8,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     alignItems: 'center',
-    minHeight: 75,
+    minHeight: 85,
+    paddingBottom: 20,
   },
   tabMenu: {
     paddingVertical: 5,

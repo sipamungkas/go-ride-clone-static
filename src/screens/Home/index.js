@@ -1,14 +1,20 @@
 import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import {View, Text, StatusBar, ScrollView} from 'react-native';
 import COLORS from '../../Colors';
 import Header from '../../components/Home/Header';
+import Bar from '../../components/Home/Bar';
+import styles from './styles';
 
-export default function Home() {
+const Home = () => {
   return (
     <View>
       <StatusBar animated backgroundColor={COLORS.PRIMARY} />
       <Header />
-      <Text>Hello World!</Text>
+      <ScrollView style={styles.container}>
+        <Bar />
+      </ScrollView>
     </View>
   );
-}
+};
+
+export default Home;
