@@ -12,4 +12,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
+  textContent: {
+    marginVertical: 15,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
