@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import COLORS from '../../../Colors';
 import Badge from '../Badge';
-import Bar from '../Bar';
 
 const Payment = () => {
   return (
