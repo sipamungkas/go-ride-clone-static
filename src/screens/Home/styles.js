@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flexGrow: 1,
   },
   contentStyle: {
-    paddingBottom: 20,
+    paddingBottom: 20 + 90,
   },
   searchContainer: {
     flexDirection: 'row',
