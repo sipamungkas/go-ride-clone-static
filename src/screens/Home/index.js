@@ -9,6 +9,7 @@ import Payment from '../../components/Home/Payment';
 import ContentMenuList from '../../components/Home/ContentMenuList';
 import Information from '../../components/Home/Information';
 import NewsList from '../../components/Home/NewsList';
+import FAB from '../../components/Home/FAB';
 
 import styles from './styles';
 import COLORS from '../../Colors';
@@ -44,6 +45,7 @@ const Home = () => {
           content="Saat menerima pesanan kamu jangan lupa untuk menjaga jarak, cuci tangan setelah menerima pesanan kamu. Cek kebersihan selalu."
         />
       </ScrollView>
+      <FAB />
     </>
   );
 };
