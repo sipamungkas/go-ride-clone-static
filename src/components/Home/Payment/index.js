@@ -6,10 +6,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import COLORS from '../../../Colors';
 import Badge from '../Badge';
+import Bar from '../Bar';
 
 const Payment = () => {
   return (
     <View style={styles.container}>
+      <View style={styles.indicatorContainer}>
+        <View style={styles.indicator} />
+        <View style={[styles.indicator, styles.indicatorActive]} />
+      </View>
       <GopayCard />
       <View style={styles.groupIcon}>
         <View style={styles.iconContainer}>

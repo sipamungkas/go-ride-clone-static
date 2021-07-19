@@ -46,4 +46,15 @@ export default StyleSheet.create({
     width: 20,
     height: 20,
   },
+  indicatorContainer: {},
+  indicator: {
+    margin: 2,
+    width: 2,
+    height: 12,
+    backgroundColor: '#b9b9b9',
+    alignSelf: 'center',
+  },
+  indicatorActive: {
+    backgroundColor: 'rgba(255,255,255,0.95)',
+  },
 });
