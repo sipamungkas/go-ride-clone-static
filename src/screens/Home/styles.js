@@ -7,7 +7,10 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
     marginTop: -20,
     padding: 10,
+    paddingBottom: 200,
+    flexGrow: 1,
   },
+  contentStyle: {},
   searchContainer: {
     flexDirection: 'row',
     flex: 1,

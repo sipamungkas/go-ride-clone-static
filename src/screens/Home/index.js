@@ -8,6 +8,7 @@ import ProfileIcon from '../../components/Home/Profile';
 import Payment from '../../components/Home/Payment';
 import ContentMenuList from '../../components/Home/ContentMenuList';
 import Information from '../../components/Home/Information';
+import NewsList from '../../components/Home/NewsList';
 
 import styles from './styles';
 import COLORS from '../../Colors';
@@ -16,10 +17,12 @@ const Home = () => {
   const [contentMenu, setContentMenu] = useState(0);
 
   return (
-    <View>
+    <>
       <StatusBar animated backgroundColor={COLORS.SECONDARY} />
       <Header />
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentStyle}>
         <Bar />
         <View style={styles.searchContainer}>
           <SearchBox />
@@ -35,8 +38,9 @@ const Home = () => {
           title="Psst.. Keamanan kamu, prioritas kami."
           content="Deretan Rekan Usaha Gopay dengan protokol kebersihan buat belanja bulanan hingga beli vitamin harian!"
         />
+        <NewsList />
       </ScrollView>
-    </View>
+    </>
   );
 };
 

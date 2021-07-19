@@ -21,6 +21,7 @@ const ContentMenuList = props => {
       showsHorizontalScrollIndicator={false}>
       {MenuList.map((menu, index) => (
         <ContentMenu
+          key={menu}
           text={menu}
           active={index === props.contentMenu}
           onPress={() => {
