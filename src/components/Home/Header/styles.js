@@ -3,7 +3,7 @@ import COLORS from '../../../Colors';
 
 export default StyleSheet.create({
   header: {
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: COLORS.SECONDARY,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,

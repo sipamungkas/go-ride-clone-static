@@ -6,5 +6,10 @@ export default StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -20,
+    padding: 10,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    flex: 1,
   },
 });
