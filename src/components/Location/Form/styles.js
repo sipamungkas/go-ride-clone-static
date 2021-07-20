@@ -6,8 +6,8 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(250,250,250,204)',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 0,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: 'rgba(0,0,0,0.3)',
@@ -18,9 +18,9 @@ export default StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 35,
+    height: 35,
+    borderRadius: 15,
     shadowColor: COLORS.PRIMARY,
     shadowOffset: {
       width: 0,
@@ -38,16 +38,16 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
   },
   primaryCircle: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 20,
     backgroundColor: COLORS.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
   orangeCircle: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 20,
     backgroundColor: COLORS.ORANGE,
     alignItems: 'center',
@@ -55,8 +55,8 @@ export default StyleSheet.create({
   },
   dot: {
     backgroundColor: 'white',
-    width: 12,
-    height: 12,
+    width: 8,
+    height: 8,
     borderRadius: 6,
   },
   formContainer: {
@@ -66,9 +66,9 @@ export default StyleSheet.create({
     width: '90%',
     height: 1,
     backgroundColor: 'rgba(0,0,0,0.3)',
-    marginVertical: 10,
+    marginVertical: 1,
   },
   textInput: {
-    fontSize: 16,
+    fontSize: 14,
   },
 });

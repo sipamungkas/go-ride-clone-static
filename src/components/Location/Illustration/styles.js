@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 50,
+    marginTop: 40,
     marginBottom: 20,
   },
   textContainer: {
@@ -12,18 +12,18 @@ export default StyleSheet.create({
   },
   image: {
     backgroundColor: 'rgba(228,22,145,255)',
-    height: 90,
-    width: 90,
-    borderRadius: 25,
-    marginRight: 20,
+    height: 60,
+    width: 60,
+    borderRadius: 18,
+    marginRight: 10,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     flexWrap: 'wrap',
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: 14,
     color: 'rgba(0,0,0,0.5)',
   },
 });

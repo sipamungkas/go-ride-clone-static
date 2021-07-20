@@ -12,7 +12,7 @@ const SelectMap = props => {
         <View style={styles.container}>
           <Icon
             name="map"
-            size={20}
+            size={15}
             color={COLORS.PRIMARY}
             style={styles.icon}
           />
