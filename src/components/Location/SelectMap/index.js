@@ -7,8 +7,8 @@ import styles from './styles';
 
 const SelectMap = props => {
   return (
-    <TouchableOpacity onPress={props.onPress}>
-      <View style={props.style}>
+    <View style={props.style}>
+      <TouchableOpacity onPress={props.onPress}>
         <View style={styles.container}>
           <Icon
             name="map"
@@ -18,8 +18,8 @@ const SelectMap = props => {
           />
           <Text style={styles.text}>Select via map</Text>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
