@@ -8,6 +8,7 @@ const Stack = createStackNavigator();
 
 // Screens
 import Home from '../screens/Home';
+import Location from '../screens/Location';
 
 //action
 
@@ -22,6 +23,13 @@ function App(props) {
         <Stack.Screen
           name="Home"
           component={Home}
+          // options={({route}) => ({
+          //   headerTitle: getHeaderTitle(route),
+          // })}
+        />
+        <Stack.Screen
+          name="Location"
+          component={Location}
           // options={({route}) => ({
           //   headerTitle: getHeaderTitle(route),
           // })}
