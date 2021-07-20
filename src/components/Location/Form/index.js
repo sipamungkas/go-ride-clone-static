@@ -1,39 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
-import locations from '../../../data/locations';
 
 const Form = props => {
-  const [originText, setOriginText] = useState();
-  const [origin, setOrigin] = useState();
-  const [destination, setDestination] = useState();
-  const findLocation = (name, type) => {
-    const regex = new RegExp(name, 'i');
-    // const regex = /${name}\/i;
-    const data = locations.filter(
-      location => location.name.match(regex) || location.address.match(regex),
-    );
-    console.log(data);
-    if (type === 1) {
-      setOrigin(data);
-    } else {
-      setDestination(data);
-    }
-  };
-
-  console.log(origin, 'origin');
-  console.log(destination, 'destination');
-
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      findLocation(originText);
-    }, 2000);
-    return () => {
-      clearTimeout(identifier);
-    };
-  }, [originText]);
-
   return (
     <View style={[styles.container, props.style]}>
       <View style={styles.groupIcon}>
@@ -51,14 +21,29 @@ const Form = props => {
       </View>
       <View style={styles.formContainer}>
         <TextInput
+          value={props.origin ? props.origin.address : props.originText}
+          onFocus={() => {
+            props.setInputFocus(1);
+            props.resetInput(1);
+          }}
           style={styles.textInput}
           placeholder="Your current location"
-          onChangeText={text => setOriginText(text)}
+          onChangeText={text => props.setTextInput(text)}
         />
         <View style={styles.divider} />
         <TextInput
+          value={
+            props.destination
+              ? props.destination.address
+              : props.destinationText
+          }
+          onFocus={() => {
+            props.setInputFocus(2);
+            props.resetInput(2);
+          }}
           style={styles.textInput}
           placeholder="Your current location"
+          onChangeText={text => props.setTextInput(text)}
         />
       </View>
     </View>
