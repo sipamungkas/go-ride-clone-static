@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginTop: 50,
+    marginBottom: 20,
   },
   textContainer: {
     justifyContent: 'space-evenly',
