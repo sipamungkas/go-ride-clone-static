@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import {View, StatusBar} from 'react-native';
 import Header from '../../components/Location/Header';
 import Form from '../../components/Location/Form';
 import SelectMap from '../../components/Location/SelectMap';
+import Illustration from '../../components/Location/Illustration';
 
 import styles from './styles';
 
@@ -13,6 +14,7 @@ const Location = () => {
       <Header />
       <Form style={styles.formContainer} />
       <SelectMap style={styles.selectMapContainer} onPress={() => {}} />
+      <Illustration />
     </View>
   );
 };
