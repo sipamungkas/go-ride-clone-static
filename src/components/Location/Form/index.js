@@ -4,9 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../../../Colors';
 import styles from './styles';
 
-const Form = () => {
+const Form = props => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.style]}>
       <View style={styles.groupIcon}>
         <View style={styles.iconContainer}>
           <View style={styles.primaryCircle}>

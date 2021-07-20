@@ -6,6 +6,11 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(250,250,250,204)',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.3)',
   },
   groupIcon: {
     alignItems: 'center',
@@ -50,9 +55,9 @@ export default StyleSheet.create({
   },
   dot: {
     backgroundColor: 'white',
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
   },
   formContainer: {
     flex: 1,

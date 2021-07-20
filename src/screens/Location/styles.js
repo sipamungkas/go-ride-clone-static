@@ -6,4 +6,11 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
   },
+  formContainer: {
+    marginTop: 20,
+  },
+  selectMapContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+  },
 });
