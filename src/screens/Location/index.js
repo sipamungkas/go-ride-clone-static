@@ -90,7 +90,9 @@ const Location = () => {
         />
         <SelectMap
           style={styles.selectMapContainer}
-          onPress={() => navigation.navigate('Map')}
+          onPress={() =>
+            navigation.navigate('Map', {inputFocus: inputFocus || 1})
+          }
         />
         {!filteredLocation && <Illustration />}
         {(originText.length >= 3 || destinationText.length >= 3) && (

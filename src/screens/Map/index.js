@@ -11,12 +11,16 @@ import MapView, {
   Callout,
 } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import locations from '../../data/locations';
+import OriginMarker from '../../components/Map/OriginMarker';
+import DestinationMarker from '../../components/Map/DestinationMarker';
+
 import styles from './styles';
 
-const Map = () => {
+const Map = props => {
+  const {inputFocus} = props.route.params;
+
   const [position, setPosition] = useState();
-  const [originMarker, setOriginMarker] = useState();
+  const [selectMarker, setSelectMarker] = useState();
   const [region, setRegion] = useState({
     latitude: -6.501872821370105,
     longitude: 110.84462898465667,
@@ -71,7 +75,7 @@ const Map = () => {
       );
     }
   }, [position]);
-  console.log(originMarker);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -92,18 +96,32 @@ const Map = () => {
         showsUserLocation={true}
         onRegionChangeComplete={newRegion => {
           setRegion(newRegion);
-          setOriginMarker(newRegion);
+          setSelectMarker(newRegion);
         }}>
-        {/* {originMarker && (
+        {/* {selectMarker && (
           <MarkerAnimated
             key={'2'}
             coordinate={{
-              latitude: originMarker.latitude,
-              longitude: originMarker.longitude,
+              latitude: selectMarker.latitude,
+              longitude: selectMarker.longitude,
             }}
             title={'Pick up location'}
           />
         )} */}
+        {selectMarker && (
+          <Marker
+            coordinate={{
+              latitude: selectMarker.latitude,
+              longitude: selectMarker.longitude,
+            }}>
+            {inputFocus === 1 ? (
+              <OriginMarker {...selectMarker} />
+            ) : (
+              <DestinationMarker {...selectMarker} />
+            )}
+            <Callout>{/* <MyCustomCalloutView {...marker} /> */}</Callout>
+          </Marker>
+        )}
 
         {/* <Polyline coordinates={[IRA, BAKSO]} /> */}
       </MapView>
