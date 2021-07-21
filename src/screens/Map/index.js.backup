@@ -1,19 +1,53 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Text} from 'react-native';
+
 import MapView, {
+  MapView
   Marker,
   PROVIDER_GOOGLE,
-  AnimatedRegion,
-  Animated,
-  MarkerAnimated,
+  Callout,
   Polyline,
 } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+import OriginMarker from '../../components/Map/OriginMarker';
+import DestinationMarker from '../../components/Map/DestinationMarker';
 
 import styles from './styles';
 
-const Map = () => {
+const routes = [
+  [110.844671, -6.501965],
+  [110.844667, -6.501526],
+  [110.844691, -6.501451],
+  [110.844729, -6.501416],
+  [110.844658, -6.501361],
+  [110.844584, -6.501281],
+  [110.844516, -6.501106],
+  [110.84449, -6.500962],
+  [110.844489, -6.500773],
+  [110.844518, -6.500379],
+  [110.84454, -6.500262],
+  [110.844575, -6.49983],
+  [110.844612, -6.499258],
+  [110.844609, -6.499236],
+  [110.844588, -6.499221],
+  [110.843772, -6.499162],
+  [110.843699, -6.49914],
+  [110.843456, -6.499023],
+  [110.843043, -6.498839],
+  [110.842704, -6.498689],
+  [110.842218, -6.498474],
+  [110.842143, -6.49845],
+  [110.842059, -6.498421],
+  [110.841568, -6.498264],
+  [110.841391, -6.498211],
+  [110.841119, -6.498136],
+];
+
+const Map = props => {
+  const {inputFocus} = props.route.params;
+
   const [position, setPosition] = useState();
+  const [selectMarker, setSelectMarker] = useState();
   const [region, setRegion] = useState({
     latitude: -6.501872821370105,
     longitude: 110.84462898465667,
@@ -33,7 +67,6 @@ const Map = () => {
             longitude: currentPosition.coords.longitude,
           };
         });
-        console.log(currentPosition.coords.latitude);
         setPosition(currentPosition);
       },
       error => {
@@ -44,16 +77,6 @@ const Map = () => {
     );
     return () => {};
   }, []);
-
-  const Berlin = {
-    latitude: 52.5200066,
-    longitude: 13.404954,
-  };
-
-  const Frankfurt = {
-    latitude: 50.1109221,
-    longitude: 8.6821267,
-  };
 
   useEffect(() => {
     if (_map.current && position) {
@@ -84,23 +107,45 @@ const Map = () => {
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
         region={region}
-        onPoiClick={data => {
-          console.log(data.name);
+        showsUserLocation={true}
+        onPress={event => {
+          console.log(event.coordinate);
         }}
-        // onRegionChangeComplete={newRegion => setRegion(newRegion)}
-      >
-        {position && (
+        onRegionChangeComplete={newRegion => {
+          setRegion(newRegion);
+          setSelectMarker(newRegion);
+        }}>
+        {/* {selectMarker && (
           <MarkerAnimated
-            draggable
-            key={'a'}
+            key={'2'}
             coordinate={{
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              latitude: selectMarker.latitude,
+              longitude: selectMarker.longitude,
             }}
-            title={'Your position'}
-            description={'Your current position detail'}
+            title={'Pick up location'}
           />
+        )} */}
+        {selectMarker && (
+          <Marker
+            coordinate={{
+              latitude: selectMarker.latitude,
+              longitude: selectMarker.longitude,
+            }}>
+            {inputFocus === 1 ? (
+              <OriginMarker {...selectMarker} />
+            ) : (
+              <DestinationMarker {...selectMarker} />
+            )}
+            <Callout>{/* <MyCustomCalloutView {...marker} /> */}</Callout>
+          </Marker>
         )}
+
+        <Polyline
+          coordinates={routes.map(route => {
+            const object = {latitude: route[1], longitude: route[0]};
+            return object;
+          })}
+        />
       </MapView>
     </View>
   );
