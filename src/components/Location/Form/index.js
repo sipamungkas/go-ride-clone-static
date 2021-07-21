@@ -42,7 +42,7 @@ const Form = props => {
             props.resetInput(2);
           }}
           style={styles.textInput}
-          placeholder="Your current location"
+          placeholder="Your destination"
           onChangeText={text => props.setTextInput(text)}
         />
       </View>

@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {View, StatusBar, ScrollView, Text} from 'react-native';
+import {View, StatusBar, ScrollView} from 'react-native';
 import Header from '../../components/Location/Header';
 import Form from '../../components/Location/Form';
 import SelectMap from '../../components/Location/SelectMap';
 import Illustration from '../../components/Location/Illustration';
 import LocationList from '../../components/Location/LocationList';
+import {useNavigation} from '@react-navigation/core';
 
 import styles from './styles';
-
 import locations from '../../data/locations';
 
 const Location = () => {
+  const navigation = useNavigation();
   const [inputFocus, setInputFocus] = useState(0);
   const [originText, setOriginText] = useState('');
   const [destinationText, setDestinationText] = useState('');
@@ -79,7 +80,10 @@ const Location = () => {
           setInputFocus={setInputFocus}
           resetInput={resetInput}
         />
-        <SelectMap style={styles.selectMapContainer} onPress={() => {}} />
+        <SelectMap
+          style={styles.selectMapContainer}
+          onPress={() => navigation.navigate('Map')}
+        />
         {filteredLocation.length === 0 && originText.length < 3 && (
           <Illustration />
         )}
