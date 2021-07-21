@@ -7,6 +7,7 @@ export default StyleSheet.create({
   },
   marker: {
     marginRight: 10,
+    alignItems: 'center',
   },
   name: {
     fontSize: 15,
@@ -14,5 +15,11 @@ export default StyleSheet.create({
   },
   address: {
     color: 'rgba(0,0,0,0.4)',
+  },
+  distance: {
+    color: 'rgba(0,0,0,0.3)',
+    fontWeight: 'bold',
+    marginTop: 8,
+    fontSize: 12,
   },
 });

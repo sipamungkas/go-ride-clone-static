@@ -12,9 +12,12 @@ const LocationList = props => {
       <View style={styles.container}>
         {props.filteredLocation.map(location => (
           <LocationItem
+            inputFocus={props.inputFocus}
             key={location.latitude}
             name={location.name}
             address={location.address}
+            latitude={location.latitude}
+            longitude={location.longitude}
             onPress={() => props.setLocation(location)}
           />
         ))}

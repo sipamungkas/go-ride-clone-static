@@ -97,6 +97,7 @@ const Location = () => {
         {!filteredLocation && <Illustration />}
         {(originText.length >= 3 || destinationText.length >= 3) && (
           <LocationList
+            inputFocus={inputFocus}
             setLocation={setLocation}
             filteredLocation={filteredLocation}
             originText={originText}
