@@ -120,6 +120,13 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+/**
+In this scope its the configuration to use local properties
+*/
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def googleMapApiKey = properties.getProperty('google.map.key') //read variable from local.properties
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -136,6 +143,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [googleMapApiKey: googleMapApiKey] //add key here so AndroidManifest.xml can read the variable
     }
     splits {
         abi {
