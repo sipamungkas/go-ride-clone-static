@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import {shallowEqual, useSelector} from 'react-redux';
-import {getDistance} from 'geolib';
+import {getDistance, convertDistance} from 'geolib';
 
 import styles from './styles';
 
@@ -24,10 +24,6 @@ const LocationItem = props => {
       return 0;
     }
   };
-  const convertDistanceToKm = () => {
-    const distanceInKm = distance() === 0 ? 0 : distance() / 1000;
-    return `${Number(distanceInKm).toFixed(1)} km`;
-  };
 
   return (
     <TouchableOpacity onPress={props.onPress}>
@@ -35,7 +31,9 @@ const LocationItem = props => {
         <View style={styles.marker}>
           <Icon name="map-marker-alt" size={30} color="rgba(0,0,0,0.3)" />
           {distance() > 0 && (
-            <Text style={styles.distance}>{convertDistanceToKm(distance)}</Text>
+            <Text style={styles.distance}>
+              {convertDistance(distance(), 'km')} km
+            </Text>
           )}
         </View>
         <View style={styles.location}>
