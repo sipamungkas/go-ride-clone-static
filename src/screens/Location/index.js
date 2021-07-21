@@ -6,6 +6,8 @@ import SelectMap from '../../components/Location/SelectMap';
 import Illustration from '../../components/Location/Illustration';
 import LocationList from '../../components/Location/LocationList';
 import {useNavigation} from '@react-navigation/core';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {setDestination, setOrigin} from '../../store/actions/map';
 
 import styles from './styles';
 import locations from '../../data/locations';
@@ -15,17 +17,19 @@ const Location = () => {
   const [inputFocus, setInputFocus] = useState(0);
   const [originText, setOriginText] = useState('');
   const [destinationText, setDestinationText] = useState('');
-  const [origin, setOrigin] = useState();
-  const [destination, setDestination] = useState();
+  // const [origin, setOrigin] = useState();
+  // const [destination, setDestination] = useState();
   const [filteredLocation, setFilteredLocation] = useState([]);
+  const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const identifier = setTimeout(() => {
       const findLocation = name => {
-        setFilteredLocation([]);
+        setFilteredLocation(null);
         const regex = new RegExp(name, 'i');
 
-        if (name.length <= 3) {
+        if (name.length < 3) {
           return;
         }
         // const regex = /${name}\/i;
@@ -49,19 +53,23 @@ const Location = () => {
 
   const setLocation = location => {
     if (inputFocus === 1) {
-      setOrigin(location);
+      setOriginText('');
+      dispatch(setOrigin(location));
+      setFilteredLocation(null);
     } else {
-      setDestination(location);
+      setDestinationText('');
+      dispatch(setDestination(location));
+      setFilteredLocation(null);
     }
   };
 
   const resetInput = focus => {
     if (focus === 1) {
       setOriginText('');
-      setOrigin();
+      dispatch(setOrigin());
     } else {
       setDestinationText('');
-      setDestination();
+      dispatch(setDestination());
     }
   };
 
@@ -73,9 +81,9 @@ const Location = () => {
         <Form
           style={styles.formContainer}
           setTextInput={inputFocus === 1 ? setOriginText : setDestinationText}
-          origin={origin}
+          origin={mapReducer.origin}
           originText={originText}
-          destination={destination}
+          destination={mapReducer.destination}
           destinationText={destinationText}
           setInputFocus={setInputFocus}
           resetInput={resetInput}
@@ -84,14 +92,13 @@ const Location = () => {
           style={styles.selectMapContainer}
           onPress={() => navigation.navigate('Map')}
         />
-        {filteredLocation.length === 0 && originText.length < 3 && (
-          <Illustration />
-        )}
-        {originText.length > 3 && (
+        {!filteredLocation && <Illustration />}
+        {(originText.length >= 3 || destinationText.length >= 3) && (
           <LocationList
             setLocation={setLocation}
             filteredLocation={filteredLocation}
             originText={originText}
+            destinationText={destinationText}
           />
         )}
       </ScrollView>

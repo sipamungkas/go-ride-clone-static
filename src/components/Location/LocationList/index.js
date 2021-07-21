@@ -4,11 +4,15 @@ import LocationItem from '../LocationItem';
 import styles from './styles';
 
 const LocationList = props => {
-  if (props.originText.length > 3 && props.filteredLocation.length > 0) {
+  if (
+    (props.originText.length > 3 || props.destinationText.length > 3) &&
+    props.filteredLocation
+  ) {
     return (
       <View style={styles.container}>
         {props.filteredLocation.map(location => (
           <LocationItem
+            key={location.latitude}
             name={location.name}
             address={location.address}
             onPress={() => props.setLocation(location)}
@@ -16,8 +20,15 @@ const LocationList = props => {
         ))}
       </View>
     );
+  } else if (props.filteredLocation && props.filteredLocation.length > 0) {
+    return (
+      <View style={styles.notFound}>
+        <Text>Location not found!</Text>
+      </View>
+    );
+  } else {
+    return <View />;
   }
-  return <Text>Location not found!</Text>;
 };
 
 export default LocationList;

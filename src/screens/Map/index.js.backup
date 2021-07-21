@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Text} from 'react-native';
-
 import MapView, {
   Marker,
   PROVIDER_GOOGLE,
@@ -8,15 +7,13 @@ import MapView, {
   Animated,
   MarkerAnimated,
   Polyline,
-  Callout,
 } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import locations from '../../data/locations';
+
 import styles from './styles';
 
 const Map = () => {
   const [position, setPosition] = useState();
-  const [originMarker, setOriginMarker] = useState();
   const [region, setRegion] = useState({
     latitude: -6.501872821370105,
     longitude: 110.84462898465667,
@@ -36,6 +33,7 @@ const Map = () => {
             longitude: currentPosition.coords.longitude,
           };
         });
+        console.log(currentPosition.coords.latitude);
         setPosition(currentPosition);
       },
       error => {
@@ -47,14 +45,14 @@ const Map = () => {
     return () => {};
   }, []);
 
-  const IRA = {
-    latitude: -6.500998714579703,
-    longitude: 110.84593790262774,
+  const Berlin = {
+    latitude: 52.5200066,
+    longitude: 13.404954,
   };
 
-  const BAKSO = {
-    latitude: -6.501872821370105,
-    longitude: 110.84462898465667,
+  const Frankfurt = {
+    latitude: 50.1109221,
+    longitude: 8.6821267,
   };
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const Map = () => {
       );
     }
   }, [position]);
-  console.log(originMarker);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -89,23 +87,20 @@ const Map = () => {
         onPoiClick={data => {
           console.log(data.name);
         }}
-        showsUserLocation={true}
-        onRegionChangeComplete={newRegion => {
-          setRegion(newRegion);
-          setOriginMarker(newRegion);
-        }}>
-        {/* {originMarker && (
+        // onRegionChangeComplete={newRegion => setRegion(newRegion)}
+      >
+        {position && (
           <MarkerAnimated
-            key={'2'}
+            draggable
+            key={'a'}
             coordinate={{
-              latitude: originMarker.latitude,
-              longitude: originMarker.longitude,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
             }}
-            title={'Pick up location'}
+            title={'Your position'}
+            description={'Your current position detail'}
           />
-        )} */}
-
-        {/* <Polyline coordinates={[IRA, BAKSO]} /> */}
+        )}
       </MapView>
     </View>
   );

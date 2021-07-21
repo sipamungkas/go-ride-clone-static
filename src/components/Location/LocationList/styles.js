@@ -4,4 +4,9 @@ export default StyleSheet.create({
   container: {
     marginTop: 20,
   },
+  notFound: {
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
