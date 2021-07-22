@@ -15,7 +15,7 @@ const Order = () => {
   useEffect(() => {
     if (_map.current) {
       _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
-        edgePadding: {top: 10, bottom: 10, left: 40, right: 40},
+        edgePadding: {top: 100, bottom: 100, left: 100, right: 100},
       });
     }
   }, []);
