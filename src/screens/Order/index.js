@@ -13,11 +13,21 @@ const Order = () => {
   const _map = useRef(null);
 
   useEffect(() => {
-    if (_map.current) {
-      _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
-        edgePadding: {top: 100, bottom: 100, left: 100, right: 100},
-      });
-    }
+    const identifier = setTimeout(() => {
+      if (_map.current) {
+        _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
+          edgePadding: {
+            top: 100,
+            bottom: 100,
+            left: 100,
+            right: 100,
+          },
+        });
+      }
+    }, 2000);
+    return () => {
+      clearTimeout(identifier);
+    };
   }, []);
   return (
     <View style={styles.container}>
@@ -33,21 +43,11 @@ const Order = () => {
         }}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         region={{
-          ...mapReducer.destination,
+          ...destination,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
         showsUserLocation={true}>
-        {/* {selectMarker && (
-          <MarkerAnimated
-            key={'2'}
-            coordinate={{
-              latitude: selectMarker.latitude,
-              longitude: selectMarker.longitude,
-            }}
-            title={'Pick up location'}
-          />
-        )} */}
         {destination && (
           <Marker
             identifier="destination"
