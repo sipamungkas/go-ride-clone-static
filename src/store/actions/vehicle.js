@@ -1,5 +1,9 @@
-import {SET_VEHICLE_ID} from './actionTypes';
+import {SET_VEHICLE_ID, SET_FEE} from './actionTypes';
 
-export const setVehicleId = id => {
-  return {type: SET_VEHICLE_ID, payload: id};
+export const setVehicle = vehicle => {
+  return {type: SET_VEHICLE_ID, payload: vehicle};
+};
+
+export const setVehicleFee = fee => {
+  return {type: SET_FEE, payload: fee};
 };

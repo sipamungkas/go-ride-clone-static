@@ -106,7 +106,7 @@ const Order = () => {
           />
         )}
       </MapView>
-      <CardDetail onSet={() => {}} fee={2300} serviceFee={3000} distance={3} />
+      <CardDetail onSet={() => {}} />
     </View>
   );
 };

@@ -1,7 +1,8 @@
-import {SET_VEHICLE_ID} from '../actions/actionTypes';
+import {SET_FEE, SET_VEHICLE_ID} from '../actions/actionTypes';
 
 const initialState = {
-  vehicleId: null,
+  vehicle: {},
+  totalFee: 0,
 };
 
 export const vehicleReducer = (state = initialState, action) => {
@@ -9,9 +10,13 @@ export const vehicleReducer = (state = initialState, action) => {
     case SET_VEHICLE_ID:
       return {
         ...state,
-        vehicleId: action.payload,
+        vehicle: action.payload,
       };
-
+    case SET_FEE:
+      return {
+        ...state,
+        totalFee: action.payload,
+      };
     default:
       return {...state};
   }
