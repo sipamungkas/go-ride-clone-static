@@ -15,13 +15,19 @@ import {convert} from '../../utils/routes/convertORSCoordsToPolyline';
 import COLORS from '../../Colors';
 import CardDetail from '../../components/Order/CardDetail';
 import CardOriginDestination from '../../components/Order/CardOriginDestination';
+import BackButton from '../../components/UI/BackButton';
+import {useDispatch} from 'react-redux';
+import {setVehicleFee} from '../../store/actions/vehicle';
 
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native';
 
 const Order = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
   const [routesCoordinates, setRoutesCoordinates] = useState(null);
+  const dispatch = useDispatch();
   const {destination, origin} = mapReducer;
+  const navigation = useNavigation();
   const _map = useRef(null);
 
   // useEffect(() => {
@@ -36,6 +42,10 @@ const Order = () => {
   //     })
   //     .catch(err => console.log(err));
   // }, [destination, origin]);
+
+  useState(() => {
+    dispatch(setVehicleFee(0));
+  }, []);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -109,6 +119,12 @@ const Order = () => {
       </MapView>
       <CardDetail onSet={() => {}} />
       <CardOriginDestination />
+      <BackButton
+        style={styles.backButton}
+        onPress={() =>
+          navigation.replace('Location', {reset: true, inputFocus: 1})
+        }
+      />
     </View>
   );
 };

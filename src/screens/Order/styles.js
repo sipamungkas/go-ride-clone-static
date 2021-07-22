@@ -10,4 +10,8 @@ export default StyleSheet.create({
     width: '100%',
     flex: 1,
   },
+  backButton: {
+    bottom: 310,
+    marginLeft: 10,
+  },
 });
