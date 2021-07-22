@@ -18,8 +18,7 @@ const Location = () => {
   const [inputFocus, setInputFocus] = useState(0);
   const [originText, setOriginText] = useState('');
   const [destinationText, setDestinationText] = useState('');
-  // const [origin, setOrigin] = useState();
-  // const [destination, setDestination] = useState();
+
   const [filteredLocation, setFilteredLocation] = useState([]);
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
   const dispatch = useDispatch();
@@ -56,7 +55,7 @@ const Location = () => {
         if (name.length < 3) {
           return;
         }
-        // const regex = /${name}\/i;
+
         const data = locations.filter(
           location =>
             location.name.match(regex) || location.address.match(regex),
