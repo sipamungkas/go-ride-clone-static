@@ -8,6 +8,7 @@ import LocationList from '../../components/Location/LocationList';
 import {useNavigation} from '@react-navigation/core';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {setDestination, setOrigin} from '../../store/actions/map';
+import Geolocation from 'react-native-geolocation-service';
 
 import styles from './styles';
 import locations from '../../data/locations';
@@ -23,6 +24,29 @@ const Location = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
   const dispatch = useDispatch();
 
+  // get and set current coordinates as Origin/pickup
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      currentPosition => {
+        dispatch(
+          setOrigin({
+            name: 'Your current location',
+            latitude: currentPosition.coords.latitude,
+            longitude: currentPosition.coords.longitude,
+            address: 'Your current location',
+          }),
+        );
+      },
+      error => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+    return () => {};
+  }, [dispatch]);
+
+  // find location after user input (1s after no input to prevent api spamming)
   useEffect(() => {
     const identifier = setTimeout(() => {
       const findLocation = name => {

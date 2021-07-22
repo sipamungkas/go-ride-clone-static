@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
