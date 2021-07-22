@@ -39,6 +39,9 @@ const VehicleItem = props => {
   const estTime = () => {
     const min = distance / vehicle.minSpeed;
     const max = distance / vehicle.maxSpeed;
+    if (Math.ceil(max * 60) === Math.ceil(min * 60)) {
+      return `${Math.ceil(min * 60)} mins`;
+    }
 
     return `${Math.ceil(max * 60)}-${Math.ceil(min * 60)} mins`;
   };

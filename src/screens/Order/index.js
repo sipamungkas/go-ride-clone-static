@@ -18,6 +18,7 @@ import CardOriginDestination from '../../components/Order/CardOriginDestination'
 import BackButton from '../../components/UI/BackButton';
 import {useDispatch} from 'react-redux';
 import {setVehicleFee} from '../../store/actions/vehicle';
+import Icon from 'react-native-vector-icons/Fontisto';
 
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -25,6 +26,11 @@ import CardOrderInProgress from '../../components/Order/CardOrderInProgress';
 
 const Order = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
+  const vehicleReducer = useSelector(
+    state => state.vehicleReducer,
+    shallowEqual,
+  );
+  const {totalFee} = vehicleReducer;
   const [routesCoordinates, setRoutesCoordinates] = useState(null);
   const [orderInProgress, setOrderInProgress] = useState(false);
   const dispatch = useDispatch();
@@ -65,7 +71,14 @@ const Order = () => {
     return () => {
       clearTimeout(identifier);
     };
-  }, []);
+  }, [orderInProgress, vehicleReducer]);
+
+  const order = () => {
+    if (totalFee <= 0) {
+      return;
+    }
+    setOrderInProgress(true);
+  };
 
   return (
     <View style={styles.container}>
@@ -85,6 +98,7 @@ const Order = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        showsMyLocationButton={false}
         showsUserLocation={true}>
         {destination && (
           <Marker
@@ -110,6 +124,15 @@ const Order = () => {
             <Callout>{/* <MyCustomCalloutView {...marker} /> */}</Callout>
           </Marker>
         )}
+        {orderInProgress && (
+          <Marker
+            coordinate={{
+              latitude: destination.latitude,
+              longitude: destination.longitude,
+            }}>
+            <Icon name="motorcycle" />
+          </Marker>
+        )}
 
         {routesCoordinates && (
           <Polyline
@@ -120,19 +143,9 @@ const Order = () => {
         )}
       </MapView>
       {!orderInProgress && (
-        <CardDetail
-          onSet={() => {
-            setOrderInProgress(true);
-          }}
-        />
+        <CardDetail onSet={order} disabled={totalFee === 0} />
       )}
-      {orderInProgress && (
-        <CardOrderInProgress
-          onSet={() => {
-            setOrderInProgress(true);
-          }}
-        />
-      )}
+      {orderInProgress && <CardOrderInProgress onSet={() => {}} />}
       <CardOriginDestination />
       <BackButton
         style={[
