@@ -16,7 +16,7 @@ const CardDetail = props => {
 
   return (
     <View style={styles.container}>
-      <Bar marginBottom={0} />
+      <Bar marginBottom={1} />
       <VehicleList />
       <View style={styles.paymentContainer}>
         <View style={styles.paymentInfo}>
