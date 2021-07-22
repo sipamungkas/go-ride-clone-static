@@ -13,6 +13,7 @@ import DestinationMarker from '../../components/Map/DestinationMarker';
 import {getDirections} from '../../services/api/OpenRouteService';
 import {convert} from '../../utils/routes/convertORSCoordsToPolyline';
 import COLORS from '../../Colors';
+import CardDetail from '../../components/Order/CardDetail';
 
 import styles from './styles';
 
@@ -22,18 +23,18 @@ const Order = () => {
   const {destination, origin} = mapReducer;
   const _map = useRef(null);
 
-  useEffect(() => {
-    const originData = [origin.longitude, origin.latitude];
-    const destinationData = [destination.longitude, destination.latitude];
-    getDirections(originData, destinationData)
-      .then(res => {
-        const routes = res.data.features[0].geometry.coordinates;
-        const formattedRoutes = convert(routes);
+  // useEffect(() => {
+  //   const originData = [origin.longitude, origin.latitude];
+  //   const destinationData = [destination.longitude, destination.latitude];
+  //   getDirections(originData, destinationData)
+  //     .then(res => {
+  //       const routes = res.data.features[0].geometry.coordinates;
+  //       const formattedRoutes = convert(routes);
 
-        setRoutesCoordinates(formattedRoutes);
-      })
-      .catch(err => console.log(err));
-  }, [destination, origin]);
+  //       setRoutesCoordinates(formattedRoutes);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, [destination, origin]);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -105,6 +106,7 @@ const Order = () => {
           />
         )}
       </MapView>
+      <CardDetail onSet={() => {}} fee={2300} serviceFee={3000} distance={3} />
     </View>
   );
 };

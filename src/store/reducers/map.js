@@ -18,6 +18,6 @@ export const mapReducer = (state = initialState, action) => {
         origin: action.payload,
       };
     default:
-      return initialState;
+      return {...state};
   }
 };
