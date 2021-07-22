@@ -57,9 +57,14 @@ const CardOrderInProgress = props => {
             </View>
           </View>
         </View>
-        <PrimaryButton style={styles.done} onPress={props.onSet}>
-          <Text style={styles.setText}>Perjalanan Selesai</Text>
-        </PrimaryButton>
+        <View style={styles.bottomRow}>
+          <View style={styles.iconContainer}>
+            <Icon name="call" size={20} color="white" />
+          </View>
+          <PrimaryButton style={styles.done} onPress={props.onSet}>
+            <Text style={styles.setText}>Perjalanan Selesai</Text>
+          </PrimaryButton>
+        </View>
       </View>
     </>
   );

@@ -80,16 +80,33 @@ export default StyleSheet.create({
     elevation: 5,
     padding: 15,
   },
+  bottomRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    marginTop: 10,
+  },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.PRIMARY,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   done: {
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+    marginTop: 0,
   },
 
   setText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    width: '85%',
   },
   imageContainer: {
     alignItems: 'center',
