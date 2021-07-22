@@ -32,7 +32,7 @@ const LocationItem = props => {
           <Icon name="map-marker-alt" size={30} color="rgba(0,0,0,0.3)" />
           {distance() > 0 && (
             <Text style={styles.distance}>
-              {convertDistance(distance(), 'km')} km
+              {convertDistance(distance(), 'km').toFixed(2)} km
             </Text>
           )}
         </View>

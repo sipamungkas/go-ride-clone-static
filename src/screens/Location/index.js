@@ -45,6 +45,18 @@ const Location = () => {
     return () => {};
   }, [dispatch]);
 
+  // navigato to order screen if origin and destination is set
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      if (mapReducer.destination?.latitude && mapReducer.origin?.latitude) {
+        navigation.navigate('Order');
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(identifier);
+    };
+  });
+
   // find location after user input (1s after no input to prevent api spamming)
   useEffect(() => {
     const identifier = setTimeout(() => {
