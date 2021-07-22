@@ -2,6 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    maxHeight: 200,
+    maxHeight: 150,
   },
 });
