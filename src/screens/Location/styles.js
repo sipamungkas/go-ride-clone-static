@@ -18,4 +18,13 @@ export default StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
   },
+  primaryButton: {
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  primaryText: {
+    marginVertical: 4,
+    alignSelf: 'center',
+    color: 'white',
+  },
 });

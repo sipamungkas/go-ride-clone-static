@@ -14,6 +14,7 @@ import {getDirections} from '../../services/api/OpenRouteService';
 import {convert} from '../../utils/routes/convertORSCoordsToPolyline';
 import COLORS from '../../Colors';
 import CardDetail from '../../components/Order/CardDetail';
+import CardOriginDestination from '../../components/Order/CardOriginDestination';
 
 import styles from './styles';
 
@@ -107,6 +108,7 @@ const Order = () => {
         )}
       </MapView>
       <CardDetail onSet={() => {}} />
+      <CardOriginDestination />
     </View>
   );
 };

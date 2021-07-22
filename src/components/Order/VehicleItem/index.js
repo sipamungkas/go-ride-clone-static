@@ -60,7 +60,7 @@ const VehicleItem = props => {
             </Text>
             <Text style={styles.subText}>
               {vehicle.passenger || 0}
-              {vehicle.passenger === '1' ? 'person' : 'people'}
+              {vehicle.passenger === '1' ? ' person' : ' people'}
             </Text>
           </View>
         </View>

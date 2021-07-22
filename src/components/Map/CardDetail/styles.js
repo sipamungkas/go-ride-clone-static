@@ -18,17 +18,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  editBtn: {
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: COLORS.PRIMARY,
-  },
-  editText: {
-    fontWeight: 'bold',
-    color: COLORS.PRIMARY,
-  },
+
   primaryShadow: {
     shadowColor: COLORS.PRIMARY,
   },

@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Notes from '../Notes';
+import EditButton from '../../UI/EditButton';
 
 import styles from './styles';
 
@@ -14,11 +15,7 @@ const CardDetail = props => {
             ? 'Set pickup location'
             : 'Set Destination location'}
         </Text>
-        <TouchableOpacity onPress={props.onEdit}>
-          <View style={styles.editBtn}>
-            <Text style={styles.editText}>Edit</Text>
-          </View>
-        </TouchableOpacity>
+        <EditButton onPress={props.onEdit} />
       </View>
       <View style={styles.information}>
         {props.inputFocus === 1 ? (

@@ -14,7 +14,8 @@ const FAB = () => {
       <Bar marginBottom={10} />
 
       <View style={styles.content}>
-        <TouchableOpacity onPress={() => navigation.navigate('Location')}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Location', {reset: false})}>
           <View style={styles.iconContainer}>
             <View style={styles.circle}>
               <IconIsto name="motorcycle" size={20} color="white" />
