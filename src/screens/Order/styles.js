@@ -11,7 +11,12 @@ export default StyleSheet.create({
     flex: 1,
   },
   backButton: {
-    bottom: 310,
     marginLeft: 10,
+  },
+  backBtnOIP: {
+    bottom: 220,
+  },
+  backBtnDefault: {
+    bottom: 310,
   },
 });

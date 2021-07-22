@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
-import {setVehicleFee, setVehicle} from '../../../store/actions/vehicle';
+import {
+  setVehicleFee,
+  setVehicle,
+  setEstTime,
+} from '../../../store/actions/vehicle';
 import {rupiahFormatter} from '../../../utils/currency/currencyFormatter';
 
 import styles from './styles';
@@ -17,9 +21,10 @@ const VehicleItem = props => {
   const [fee, setFee] = useState(0);
 
   const {vehicle, distance} = props;
-  const setVehicleData = data => {
+  const setVehicleData = (data, time) => {
     dispatch(setVehicle(data));
     dispatch(setVehicleFee(fee));
+    dispatch(setEstTime(time));
   };
 
   useEffect(() => {
@@ -32,7 +37,6 @@ const VehicleItem = props => {
   }, [vehicle, distance]);
 
   const estTime = () => {
-    console.log(distance, vehicle.minSpeed, vehicle.maxSpeed);
     const min = distance / vehicle.minSpeed;
     const max = distance / vehicle.maxSpeed;
 
@@ -42,7 +46,7 @@ const VehicleItem = props => {
   console.log(vehicleReducer, mapReducer);
 
   return (
-    <TouchableOpacity onPress={() => setVehicleData(vehicle, fee)}>
+    <TouchableOpacity onPress={() => setVehicleData(vehicle, estTime())}>
       <View style={styles.container}>
         <View style={styles.leftContent}>
           <Image

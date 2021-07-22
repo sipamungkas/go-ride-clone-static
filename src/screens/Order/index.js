@@ -21,27 +21,29 @@ import {setVehicleFee} from '../../store/actions/vehicle';
 
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
+import CardOrderInProgress from '../../components/Order/CardOrderInProgress';
 
 const Order = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
   const [routesCoordinates, setRoutesCoordinates] = useState(null);
+  const [orderInProgress, setOrderInProgress] = useState(false);
   const dispatch = useDispatch();
   const {destination, origin} = mapReducer;
   const navigation = useNavigation();
   const _map = useRef(null);
 
-  // useEffect(() => {
-  //   const originData = [origin.longitude, origin.latitude];
-  //   const destinationData = [destination.longitude, destination.latitude];
-  //   getDirections(originData, destinationData)
-  //     .then(res => {
-  //       const routes = res.data.features[0].geometry.coordinates;
-  //       const formattedRoutes = convert(routes);
+  useEffect(() => {
+    const originData = [origin.longitude, origin.latitude];
+    const destinationData = [destination.longitude, destination.latitude];
+    getDirections(originData, destinationData)
+      .then(res => {
+        const routes = res.data.features[0].geometry.coordinates;
+        const formattedRoutes = convert(routes);
 
-  //       setRoutesCoordinates(formattedRoutes);
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [destination, origin]);
+        setRoutesCoordinates(formattedRoutes);
+      })
+      .catch(err => console.log(err));
+  }, [destination, origin]);
 
   useState(() => {
     dispatch(setVehicleFee(0));
@@ -117,10 +119,26 @@ const Order = () => {
           />
         )}
       </MapView>
-      <CardDetail onSet={() => {}} />
+      {!orderInProgress && (
+        <CardDetail
+          onSet={() => {
+            setOrderInProgress(true);
+          }}
+        />
+      )}
+      {orderInProgress && (
+        <CardOrderInProgress
+          onSet={() => {
+            setOrderInProgress(true);
+          }}
+        />
+      )}
       <CardOriginDestination />
       <BackButton
-        style={styles.backButton}
+        style={[
+          styles.backButton,
+          orderInProgress ? styles.backBtnOIP : styles.backBtnDefault,
+        ]}
         onPress={() =>
           navigation.replace('Location', {reset: true, inputFocus: 1})
         }
