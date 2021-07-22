@@ -1,26 +1,49 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, Text} from 'react-native';
 import {shallowEqual, useSelector} from 'react-redux';
-import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps';
+import MapView, {
+  Marker,
+  PROVIDER_GOOGLE,
+  Callout,
+  Polyline,
+} from 'react-native-maps';
 
 import OriginMarker from '../../components/Map/OriginMarker';
 import DestinationMarker from '../../components/Map/DestinationMarker';
+import {getDirections} from '../../services/api/OpenRouteService';
+import {convert} from '../../utils/routes/convertORSCoordsToPolyline';
+import COLORS from '../../Colors';
 
 import styles from './styles';
+
 const Order = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
+  const [routesCoordinates, setRoutesCoordinates] = useState(null);
   const {destination, origin} = mapReducer;
   const _map = useRef(null);
+
+  useEffect(() => {
+    const originData = [origin.longitude, origin.latitude];
+    const destinationData = [destination.longitude, destination.latitude];
+    getDirections(originData, destinationData)
+      .then(res => {
+        const routes = res.data.features[0].geometry.coordinates;
+        const formattedRoutes = convert(routes);
+
+        setRoutesCoordinates(formattedRoutes);
+      })
+      .catch(err => console.log(err));
+  }, [destination, origin]);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
       if (_map.current) {
         _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
           edgePadding: {
-            top: 100,
-            bottom: 100,
-            left: 100,
-            right: 100,
+            top: 300,
+            bottom: 300,
+            left: 300,
+            right: 300,
           },
         });
       }
@@ -29,6 +52,7 @@ const Order = () => {
       clearTimeout(identifier);
     };
   }, []);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -73,7 +97,13 @@ const Order = () => {
           </Marker>
         )}
 
-        {/* <Polyline coordinates={[IRA, BAKSO]} /> */}
+        {routesCoordinates && (
+          <Polyline
+            coordinates={routesCoordinates}
+            strokeColor={COLORS.PRIMARY}
+            strokeWidth={3}
+          />
+        )}
       </MapView>
     </View>
   );
