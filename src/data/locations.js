@@ -13,8 +13,8 @@ const locations = [
   },
   {
     name: 'TOKO MBAK IRA',
-    latitude: -6.500998714579703,
-    longitude: 110.84593790262774,
+    latitude: -6.501432130238056,
+    longitude: 110.84579050540924,
     address:
       'Unnamed Road, Nepal, Kaligarang, Keling, Kabupaten Jepara, Jawa Tengah 59454',
   },

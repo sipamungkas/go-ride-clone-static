@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 
 import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
@@ -9,17 +9,17 @@ import CardDetail from '../../components/Map/CardDetail';
 import BackButton from '../../components/Map/BackButton';
 import {useNavigation} from '@react-navigation/core';
 import {useDispatch} from 'react-redux';
-// import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import locations from '../../data/locations';
+
 import {setDestination, setOrigin} from '../../store/actions/map';
 
 import styles from './styles';
 
 const Map = props => {
   const {inputFocus} = props.route.params;
-  // const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [position, setPosition] = useState();
+
   const [selectMarker, setSelectMarker] = useState();
   const [region, setRegion] = useState({
     latitude: -6.501872821370105,
@@ -33,9 +33,10 @@ const Map = props => {
     const data = {
       latitude: selectMarker?.latitude || null,
       longitude: selectMarker?.longitude || null,
-      name: 'Unnamed road',
-      address: 'Unnamed Road',
+      name: selectMarker?.name || 'Unnamed road',
+      address: selectMarker?.address || 'Unnamed road',
     };
+    console.log(data, selectMarker);
     if (inputFocus === 1) {
       dispatch(setOrigin(data));
     } else {
@@ -53,7 +54,12 @@ const Map = props => {
             longitude: currentPosition.coords.longitude,
           };
         });
-        setPosition(currentPosition);
+        setSelectMarker({
+          name: 'Unnamed road',
+          latitude: currentPosition.coords.latitude,
+          longitude: currentPosition.coords.longitude,
+          address: null,
+        });
       },
       error => {
         // See error code charts below.
@@ -64,20 +70,39 @@ const Map = props => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    if (_map.current && position) {
-      _map.current.animateCamera(
-        {
-          center: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-          zoom: 15,
-        },
-        5000,
-      );
-    }
-  }, [position]);
+  const onMapPress = data => {
+    const marker = {
+      name: data.nativeEvent?.name || 'Unnamed road',
+      latitude: data.nativeEvent.coordinate.latitude,
+      longitude: data.nativeEvent.coordinate.longitude,
+      address: findAddressByName(selectMarker?.name || 'Unnamed road'),
+    };
+    setRegion(prevState => {
+      return {...prevState, marker};
+    });
+    setSelectMarker(marker);
+  };
+
+  const onPoiClickHandler = data => {
+    const address = findAddressByName(selectMarker?.name || 'Unnamed road');
+    const poi = {
+      name: data.nativeEvent.name,
+      latitude: data.nativeEvent.coordinate.latitude,
+      longitude: data.nativeEvent.coordinate.longitude,
+      address,
+    };
+
+    setSelectMarker(poi);
+    setRegion(prevState => {
+      return {...prevState, latitude: poi.latitude, longitude: poi.longitude};
+    });
+  };
+
+  const findAddressByName = name => {
+    const sanitize = name.trim().replace(/(\r\n|\n|\r)/i, ' ');
+    const location = locations.find(data => data.name === sanitize);
+    return location?.address || 'Unnamed road';
+  };
 
   return (
     <View style={styles.container}>
@@ -93,14 +118,12 @@ const Map = props => {
         ref={_map}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         region={region}
-        onPoiClick={data => {
-          console.log(data.name);
-        }}
+        onPoiClick={onPoiClickHandler}
         showsUserLocation={true}
         onRegionChangeComplete={newRegion => {
           setRegion(newRegion);
-          setSelectMarker(newRegion);
-        }}>
+        }}
+        onPress={onMapPress}>
         {/* {selectMarker && (
           <MarkerAnimated
             key={'2'}
@@ -133,8 +156,8 @@ const Map = props => {
         onEdit={() => navigation.goBack()}
         onSet={onSetHandler}
         inputFocus={inputFocus}
-        name="Bakso"
-        address="DK. KRAJAN, RT.008/RW.003, Nepal, Kaligarang, Keling, Kabupaten Jepara, Jawa Tengah 59456"
+        name={selectMarker?.name || 'Unnamed road'}
+        address={selectMarker?.address || null}
       />
     </View>
   );
