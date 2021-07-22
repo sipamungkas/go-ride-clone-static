@@ -42,7 +42,7 @@ const Order = () => {
       if (_map.current) {
         _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
           edgePadding: {
-            top: 300,
+            top: 500,
             bottom: 300,
             left: 300,
             right: 300,

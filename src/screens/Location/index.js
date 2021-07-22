@@ -19,7 +19,6 @@ const Location = props => {
   const [inputFocus, setInputFocus] = useState(0);
   const [originText, setOriginText] = useState('');
   const [destinationText, setDestinationText] = useState('');
-  const {reset} = props.route.params;
 
   const [filteredLocation, setFilteredLocation] = useState([]);
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
