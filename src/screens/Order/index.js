@@ -57,18 +57,17 @@ const Order = () => {
     dispatch(setVehicleFee(0));
   }, []);
 
-  useState(() => {
-    const identifier = setInterval(() => {
+  useEffect(() => {
+    const identifier = setTimeout(() => {
       if (orderInProgress) {
         setOrderInProgress(false);
         navigation.navigate('OrderSuccess');
       }
     }, 10000);
     return () => {
-      setOrderInProgress(false);
-      clearInterval(identifier);
+      clearTimeout(identifier);
     };
-  }, [orderInProgress]);
+  }, [orderInProgress, navigation]);
 
   useEffect(() => {
     const identifier = setTimeout(() => {

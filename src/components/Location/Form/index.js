@@ -4,6 +4,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 
 const Form = props => {
+  const showName = data => {
+    if (data?.name === data?.address) {
+      return data?.name;
+    }
+    return `${data?.name}, ${data?.address}`;
+  };
+
   return (
     <View style={[styles.container, props.style]}>
       <View style={styles.groupIcon}>
@@ -21,7 +28,7 @@ const Form = props => {
       </View>
       <View style={styles.formContainer}>
         <TextInput
-          value={props.origin ? props.origin.address : props.originText}
+          value={showName(props.origin || props.originText)}
           onFocus={() => {
             props.setInputFocus(1);
             props.resetInput(1);
@@ -32,11 +39,7 @@ const Form = props => {
         />
         <View style={styles.divider} />
         <TextInput
-          value={
-            props.destination
-              ? props.destination.address
-              : props.destinationText
-          }
+          value={showName(props.destination || props.destinationText)}
           onFocus={() => {
             props.setInputFocus(2);
             props.resetInput(2);
