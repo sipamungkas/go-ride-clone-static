@@ -20,6 +20,7 @@ const Rate = () => {
       <View style={styles.starsContainer}>
         {stars.map(star => (
           <Star
+            key={star.id}
             id={star.id}
             active={star.id <= rate}
             text={star.text}

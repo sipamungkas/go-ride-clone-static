@@ -46,8 +46,6 @@ const VehicleItem = props => {
     return `${Math.ceil(max * 60)}-${Math.ceil(min * 60)} mins`;
   };
 
-  console.log(vehicleReducer, mapReducer);
-
   return (
     <TouchableOpacity onPress={() => setVehicleData(vehicle, estTime())}>
       <View style={styles.container}>

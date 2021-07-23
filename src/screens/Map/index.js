@@ -37,7 +37,7 @@ const Map = props => {
       name: selectMarker?.name || 'Unnamed road',
       address: selectMarker?.address || 'Unnamed road',
     };
-    console.log(data, selectMarker);
+
     if (inputFocus === 1) {
       dispatch(setOrigin(data));
     } else {
