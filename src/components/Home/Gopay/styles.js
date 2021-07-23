@@ -3,6 +3,7 @@ import COLORS from '../../../Colors';
 
 export default StyleSheet.create({
   container: {
+    marginTop: 5,
     alignContent: 'flex-start',
     justifyContent: 'flex-start',
     height: 80,

@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {FlatList, LogBox, Text, View} from 'react-native';
 import GopayCard from '../Gopay';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -7,14 +7,26 @@ import styles from './styles';
 import COLORS from '../../../Colors';
 import Badge from '../Badge';
 
+const payments = [1, 2];
+
 const Payment = () => {
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.indicatorContainer}>
         <View style={styles.indicator} />
         <View style={[styles.indicator, styles.indicatorActive]} />
       </View>
-      <GopayCard />
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        inverted
+        keyExtractor={item => item}
+        data={payments}
+        renderItem={() => <GopayCard />}
+      />
+
       <View style={styles.groupIcon}>
         <View style={styles.iconContainer}>
           <View style={styles.iconBackground}>

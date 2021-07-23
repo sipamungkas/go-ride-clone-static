@@ -60,10 +60,12 @@ const Order = () => {
   useState(() => {
     const identifier = setInterval(() => {
       if (orderInProgress) {
+        setOrderInProgress(false);
         navigation.navigate('OrderSuccess');
       }
     }, 10000);
     return () => {
+      setOrderInProgress(false);
       clearInterval(identifier);
     };
   }, [orderInProgress]);
