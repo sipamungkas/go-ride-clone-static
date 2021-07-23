@@ -15,7 +15,7 @@ const VehicleItem = props => {
     state => state.vehicleReducer,
     shallowEqual,
   );
-  const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
+
   const dispatch = useDispatch();
 
   const [fee, setFee] = useState(0);

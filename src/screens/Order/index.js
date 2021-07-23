@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {shallowEqual, useSelector} from 'react-redux';
 import MapView, {
   Marker,
