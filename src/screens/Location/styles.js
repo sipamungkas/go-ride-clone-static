@@ -20,9 +20,10 @@ export default StyleSheet.create({
   },
   primaryButton: {
     justifyContent: 'center',
-    marginBottom: 10,
+    height: 40,
   },
   primaryText: {
+    fontWeight: 'bold',
     marginVertical: 4,
     alignSelf: 'center',
     color: 'white',

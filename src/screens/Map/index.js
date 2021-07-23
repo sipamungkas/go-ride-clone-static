@@ -14,6 +14,7 @@ import locations from '../../data/locations';
 import {setDestination, setOrigin} from '../../store/actions/map';
 
 import styles from './styles';
+import LocateMe from '../../components/UI/LocatMe';
 
 const Map = props => {
   const {inputFocus} = props.route.params;
@@ -81,6 +82,31 @@ const Map = props => {
       return {...prevState, marker};
     });
     setSelectMarker(marker);
+  };
+
+  const locateMe = () => {
+    Geolocation.getCurrentPosition(
+      currentPosition => {
+        setRegion(prevState => {
+          return {
+            ...prevState,
+            latitude: currentPosition.coords.latitude,
+            longitude: currentPosition.coords.longitude,
+          };
+        });
+        setSelectMarker({
+          name: 'Unnamed road',
+          latitude: currentPosition.coords.latitude,
+          longitude: currentPosition.coords.longitude,
+          address: null,
+        });
+      },
+      error => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
   };
 
   const onPoiClickHandler = data => {
@@ -152,6 +178,13 @@ const Map = props => {
         {/* <Polyline coordinates={[IRA, BAKSO]} /> */}
       </MapView>
       <BackButton inputFocus={inputFocus} onPress={() => navigation.goBack()} />
+      <LocateMe
+        style={[
+          styles.locateMe,
+          inputFocus === 1 ? styles.pickup : styles.destination,
+        ]}
+        onPress={locateMe}
+      />
       <CardDetail
         onEdit={() => navigation.goBack()}
         onSet={onSetHandler}

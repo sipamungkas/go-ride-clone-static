@@ -65,15 +65,18 @@ export default StyleSheet.create({
   address: {
     color: 'rgba(0,0,0,0.6)',
   },
-  setBtn: {
+  primaryButton: {
+    width: '100%',
     marginTop: 10,
     backgroundColor: COLORS.PRIMARY,
     paddingVertical: 12,
     borderRadius: 20,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   setText: {
     color: 'white',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

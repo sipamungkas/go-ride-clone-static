@@ -23,6 +23,8 @@ import Icon from 'react-native-vector-icons/Fontisto';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CardOrderInProgress from '../../components/Order/CardOrderInProgress';
+import LocateMe from '../../components/UI/LocatMe';
+import Shield from '../../components/UI/Shield';
 
 const Order = () => {
   const mapReducer = useSelector(state => state.mapReducer, shallowEqual);
@@ -60,10 +62,10 @@ const Order = () => {
       if (_map.current) {
         _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
           edgePadding: {
-            top: 500,
-            bottom: 300,
-            left: 300,
-            right: 300,
+            top: 400,
+            bottom: 50,
+            left: 200,
+            right: 200,
           },
         });
       }
@@ -72,6 +74,19 @@ const Order = () => {
       clearTimeout(identifier);
     };
   }, [orderInProgress, vehicleReducer]);
+
+  const locateMe = () => {
+    if (_map.current) {
+      _map.current.fitToSuppliedMarkers(['origin', 'destination'], {
+        edgePadding: {
+          top: 500,
+          bottom: 300,
+          left: 300,
+          right: 300,
+        },
+      });
+    }
+  };
 
   const order = () => {
     if (totalFee <= 0) {
@@ -161,6 +176,20 @@ const Order = () => {
         onPress={() =>
           navigation.replace('Location', {reset: true, inputFocus: 1})
         }
+      />
+      <LocateMe
+        style={[
+          styles.locateMe,
+          orderInProgress ? styles.backBtnOIP : styles.backBtnDefault,
+        ]}
+        onPress={locateMe}
+      />
+      <Shield
+        style={[
+          styles.locateMe,
+          orderInProgress ? styles.shieldOIP : styles.shieldDefault,
+        ]}
+        onPress={() => {}}
       />
     </View>
   );

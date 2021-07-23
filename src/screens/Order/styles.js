@@ -13,10 +13,19 @@ export default StyleSheet.create({
   backButton: {
     marginLeft: 10,
   },
+  locateMe: {
+    right: 10,
+  },
   backBtnOIP: {
     bottom: 220,
   },
   backBtnDefault: {
     bottom: 310,
+  },
+  shieldOIP: {
+    bottom: 270,
+  },
+  shieldDefault: {
+    bottom: 360,
   },
 });

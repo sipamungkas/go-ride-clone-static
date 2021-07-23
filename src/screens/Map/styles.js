@@ -10,4 +10,13 @@ export default StyleSheet.create({
     width: '100%',
     flex: 1,
   },
+  locateMe: {
+    right: 20,
+  },
+  destination: {
+    bottom: 220,
+  },
+  pickup: {
+    bottom: 260,
+  },
 });

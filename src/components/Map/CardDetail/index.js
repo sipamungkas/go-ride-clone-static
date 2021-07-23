@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Notes from '../Notes';
 import EditButton from '../../UI/EditButton';
+import PrimaryButton from '../../UI/PrimaryButton';
 
 import styles from './styles';
 
@@ -37,15 +38,13 @@ const CardDetail = props => {
         </View>
       </View>
       {props.inputFocus === 1 && <Notes />}
-      <TouchableOpacity onPress={props.onSet}>
-        <View style={styles.setBtn}>
-          <Text style={styles.setText}>
-            {props.inputFocus === 1
-              ? 'Set pickup location'
-              : 'Set destination location'}
-          </Text>
-        </View>
-      </TouchableOpacity>
+      <PrimaryButton style={styles.primaryButton} onPress={props.onSet}>
+        <Text style={styles.setText}>
+          {props.inputFocus === 1
+            ? 'Set pickup location'
+            : 'Set destination location'}
+        </Text>
+      </PrimaryButton>
     </View>
   );
 };
