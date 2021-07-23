@@ -145,7 +145,13 @@ const Order = () => {
       {!orderInProgress && (
         <CardDetail onSet={order} disabled={totalFee === 0} />
       )}
-      {orderInProgress && <CardOrderInProgress onSet={() => {}} />}
+      {orderInProgress && (
+        <CardOrderInProgress
+          onSet={() => {
+            navigation.navigate('OrderSuccess');
+          }}
+        />
+      )}
       <CardOriginDestination />
       <BackButton
         style={[
